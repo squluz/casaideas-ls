@@ -9,8 +9,23 @@
 // ***********************************************
 //
 //
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+
+import Home from "../e2e/pages/home"
+
+const home = new Home()
+
+
+
+
+
+
+Cypress.Commands.add('closeFloatingElements', () => { 
+    home.personalNotificationsModalCloseBtn().click({ force: true })
+    home.closeTopBanner().click()
+    home.exponeaBannerPromoCloseBtn().click()
+    home.exponeaBannerSubscribeCloseBtn().click()
+    home.aceptCookies().click()
+ })
 //
 //
 // -- This is a child command --
