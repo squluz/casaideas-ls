@@ -15,15 +15,13 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-Cypress.on('uncaught:exception', (err, runnable, promise) => {
-    // when the exception originated from an unhandled promise
-    // rejection, the promise is provided as a third argument
-    // you can turn off failing the test in this case
-    if (promise) {
-        return false
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // Si el error se origina en un script de origen cruzado, lo ignoramos
+    if (err.message.includes('Script error.')) {
+      return false;
     }
-    // we still want to ensure there are no other unexpected
-    // errors, so we let them fail the test
-})
+    // De lo contrario, dejamos que Cypress falle el test
+    return true;
+  });
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
